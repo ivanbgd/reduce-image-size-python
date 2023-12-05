@@ -1,2 +1,3 @@
-# reduce-image-size-python
-Reduces size of images in a folder
+# Reduce Image Size
+
+Reduces size of images in a folder (optionally recursively).
