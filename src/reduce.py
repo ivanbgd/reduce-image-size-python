@@ -10,7 +10,7 @@ def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool) 
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
 
     for src_path in src_paths:
-        # print(f"Source: {src_path}") ###
+        print(f"Source: {src_path}") ###
         try:
             with Image.open(src_path) as image:
                 if resize:
@@ -20,9 +20,11 @@ def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool) 
                     image = image.resize(new_size, Image.Resampling.LANCZOS)
 
                 dst_path: Path = dst_dir / src_path.relative_to(src_dir)
-                # print(f"Dest: {dst_path}")  ###
+                print(f"Dest: {dst_path} {dst_path.parent}")  ###
+                dst_path.parent.mkdir(parents=True, exist_ok=True)  # TODO: Improve; this is inefficient. Create all (sub)dirs only once, perhaps in a separate function.
+                # The argument `optimize` is used for both JPEGs and PNGs.
                 # The argument `quality` is used for JPEGs, and simply ignored in case of PNGs.
-                # image.save(dst_path, optimize=True, quality=QUALITY)
+                image.save(dst_path, optimize=True, quality=QUALITY)
         except Exception as e:
             print(e)
 
