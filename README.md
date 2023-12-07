@@ -9,12 +9,12 @@ Keeps the original images and creates copies with reduced file size.
 
 Copies the entire folder tree, with all sub-folders that exist in the source tree.  
 The target folder tree will be created automatically, and the new reduced-size images will be copied properly to their respective paths.  
-It is only required to provide the root target folder, but it will also be created if it doesn't exist.
+It is only required to provide the root target folder, and it will also be created if it doesn't exist.
 
 The destination folder can be the same as the source folder, in which case the original images will be overwritten, and not retained.
 
 Options:
-- Look into subdirectories recursively: `-r`, `--recursive`
+- Look into subdirectories recursively (process entire tree): `-r`, `--recursive`
 - Reduce both image dimensions by half: `--resize`
 - JPEG quality, on a scale from 0 (worst) to 95 (best); the default is 75; ignored in case of PNGs: `--quality [QUALITY]`
 
