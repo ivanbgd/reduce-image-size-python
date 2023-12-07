@@ -9,8 +9,6 @@ QUALITY = 75
 
 
 def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool, quality: int = QUALITY) -> None:
-    start = timeit.default_timer()
-
     print(f"JPEG quality = {quality}\n", flush=True)
 
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
@@ -34,12 +32,10 @@ def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool, 
         except Exception as e:
             print(e)
 
-    end = timeit.default_timer()
-    diff = end - start
-    print(f"\nTook {datetime.timedelta(seconds=diff)} or {diff:.3f} s to complete.")
-
 
 def main() -> None:
+    start = timeit.default_timer()
+
     parser = argparse.ArgumentParser(
         prog="Reduce Image Size",
         description="Reduces size of images in a folder (and optionally sub-folders)"
@@ -53,7 +49,8 @@ def main() -> None:
     parser.add_argument(
         "dst_dir",
         type=str,
-        help="path to destination folder for reduced-size copies of original images"
+        help="path to destination folder for reduced-size copies of original images; "
+             "can be the same as source, in which case source images are overwritten"
     )
     parser.add_argument(
         "-r", "--recursive",
@@ -89,6 +86,10 @@ def main() -> None:
         return
 
     process_images(src_dir, dst_dir, recursive, resize, quality)
+
+    end = timeit.default_timer()
+    diff = end - start
+    print(f"\nTook {datetime.timedelta(seconds=diff)} or {diff:.3f} s to complete.")
 
 
 if __name__ == "__main__":
