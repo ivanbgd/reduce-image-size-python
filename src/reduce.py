@@ -6,11 +6,12 @@ from PIL import Image
 QUALITY = 75
 
 
-def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool) -> None:
+def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool, quality: int = QUALITY) -> None:
+    print(f"JPEG quality = {quality}\n", flush=True)
+
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
 
     for src_path in src_paths:
-        print(f"Source: {src_path}") ###
         try:
             with Image.open(src_path) as image:
                 if resize:
@@ -20,11 +21,12 @@ def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool) 
                     image = image.resize(new_size, Image.Resampling.LANCZOS)
 
                 dst_path: Path = dst_dir / src_path.relative_to(src_dir)
-                print(f"Dest: {dst_path} {dst_path.parent}")  ###
-                dst_path.parent.mkdir(parents=True, exist_ok=True)  # TODO: Improve; this is inefficient. Create all (sub)dirs only once, perhaps in a separate function.
+                print(f"Resized \"{src_path}\" to \"{dst_path}\".", flush=True)
+                dst_path.parent.mkdir(parents=True, exist_ok=True)
+
                 # The argument `optimize` is used for both JPEGs and PNGs.
                 # The argument `quality` is used for JPEGs, and simply ignored in case of PNGs.
-                image.save(dst_path, optimize=True, quality=QUALITY)
+                image.save(dst_path, optimize=True, quality=quality)
         except Exception as e:
             print(e)
 
@@ -55,12 +57,22 @@ def main() -> None:
         action="store_true",
         help="reduce both image dimensions by half"
     )
+    parser.add_argument(
+        "--quality",
+        type=int,
+        nargs="?",
+        default=QUALITY,
+        const=QUALITY,
+        help=f"JPEG quality, on a scale from 0 (worst) to 95 (best); "
+             f"the default is {QUALITY}; ignored in case of PNGs"
+    )
 
     args = parser.parse_args()
     src_dir: Path = Path(args.src_dir)
     dst_dir: Path = Path(args.dst_dir)
     recursive: bool = args.recursive
     resize: bool = args.resize
+    quality: int = args.quality
 
     try:
         dst_dir.mkdir(parents=True, exist_ok=True)
@@ -68,7 +80,7 @@ def main() -> None:
         print(f"\"{dst_dir}\" exists and is a file! Provide a proper target directory.")
         return
 
-    process_images(src_dir, dst_dir, recursive, resize)
+    process_images(src_dir, dst_dir, recursive, resize, quality)
 
 
 if __name__ == "__main__":
