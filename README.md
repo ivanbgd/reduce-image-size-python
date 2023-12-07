@@ -14,12 +14,12 @@ It is only required to provide the root target folder, but it will also be creat
 The destination folder can be the same as the source folder, in which case the original images will be overwritten, and not retained.
 
 Options:
-- Look into subdirectories recursively: `--recursive`, `-r`
+- Look into subdirectories recursively: `-r`, `--recursive`
 - Reduce both image dimensions by half: `--resize`
 - JPEG quality, on a scale from 0 (worst) to 95 (best); the default is 75; ignored in case of PNGs: `--quality [QUALITY]`
 
 Run as:  
-`python src/reduce.py <source_folder> <destination_folder> [-r] [--resize]`
+`python src/reduce.py <source_folder> <destination_folder> [options]`
 
 Written in Python 3.12.0.  
 Tested on Windows 11 with JPEGs and PNGs.  
