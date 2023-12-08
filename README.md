@@ -14,14 +14,33 @@ It is only required to provide the root target folder, and it will also be creat
 The destination folder can be the same as the source folder, in which case the original images will be overwritten, and not retained.
 
 Options:
-- Look into subdirectories recursively (process entire tree): `-r`, `--recursive`
+- Look into subdirectories recursively (process the entire tree); recommended: `-r`, `--recursive`
 - Reduce both image dimensions by half: `--resize`
 - JPEG quality, on a scale from 0 (worst) to 95 (best); the default is 75; ignored in case of PNGs: `--quality [QUALITY]`
-
-Run as:  
-`python src/reduce.py <source_folder> <destination_folder> [options]`
 
 Written in Python 3.12.0.  
 Tested on Windows 11 with JPEGs and PNGs.  
 Might work with other image formats, too, but this hasn't been tested.  
 Other OSes haven't been tested, but should work.
+
+## Running the Application
+### Windows
+Go to the repository directory.
+
+Create & activate virtual environment and install requirements:  
+```commandline
+python -m venv venv
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+That only needs to be done once.
+
+If in the repository directory, activate the virtual environment:  
+`venv\Scripts\activate`
+
+and run the program run as:  
+`python src\reduce.py <source_folder> <destination_folder> [options]`
+
+Or, provide full path to the program.
+
+Paths to the source and destination folders can be absolute or relative.
