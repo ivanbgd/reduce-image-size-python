@@ -38,7 +38,7 @@ That only needs to be done once.
 If in the repository directory, activate the virtual environment:  
 `venv\Scripts\activate`
 
-and run the program run as:  
+and run the program as:  
 `python src\reduce.py <source_folder> <destination_folder> [options]`
 
 Or, provide full path to the program.
