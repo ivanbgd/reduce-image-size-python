@@ -61,7 +61,7 @@ def main() -> None:
     start = timeit.default_timer()
 
     parser = argparse.ArgumentParser(
-        prog="Reduce Image Size",
+        prog="python src\\reduce.py",
         description="Reduces size of images in a folder (and optionally sub-folders)"
     )
 
