@@ -11,7 +11,7 @@ Copies the entire folder tree, with all sub-folders that exist in the source tre
 The target folder tree will be created automatically, and the new reduced-size images will be copied properly to their respective paths.  
 It is only required to provide the root target folder, and it will also be created if it doesn't exist.
 
-The destination folder can be the same as the source folder, in which case the original images will be overwritten, and not retained.
+The destination folder can be the same as the source folder, in which case the original images will be **overwritten**, and not retained.
 
 Options:
 - Look into subdirectories recursively (process the entire tree); recommended: `-r`, `--recursive`
