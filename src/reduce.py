@@ -12,40 +12,42 @@ def different_paths(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool,
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
 
     for src_path in src_paths:
-        try:
-            with Image.open(src_path) as image:
-                if resize:
-                    image_size = image.size
-                    # Downsize the image with the LANCZOS filter (gives the highest quality).
-                    new_size = (image_size[0] // 2, image_size[1] // 2)
-                    image = image.resize(new_size, Image.Resampling.LANCZOS)
+        if src_path.is_file():
+            try:
+                with Image.open(src_path) as image:
+                    if resize:
+                        image_size = image.size
+                        # Downsize the image with the LANCZOS filter (gives the highest quality).
+                        new_size = (image_size[0] // 2, image_size[1] // 2)
+                        image = image.resize(new_size, Image.Resampling.LANCZOS)
 
-                dst_path: Path = dst_dir / src_path.relative_to(src_dir)
-                dst_path.parent.mkdir(parents=True, exist_ok=True)
+                    dst_path: Path = dst_dir / src_path.relative_to(src_dir)
+                    dst_path.parent.mkdir(parents=True, exist_ok=True)
 
-                # The argument `optimize` is used for both JPEGs and PNGs.
-                # The argument `quality` is used for JPEGs, and simply ignored in case of PNGs.
-                image.save(dst_path, optimize=True, quality=quality)
-                print(f"Resized \"{src_path}\" to \"{dst_path}\".", flush=True)
-        except Exception as e:
-            print(e)
+                    # The argument `optimize` is used for both JPEGs and PNGs.
+                    # The argument `quality` is used for JPEGs, and simply ignored in case of PNGs.
+                    image.save(dst_path, optimize=True, quality=quality)
+                    print(f"Resized \"{src_path}\" to \"{dst_path}\".", flush=True)
+            except Exception as e:
+                print(e)
 
 
 def same_paths(src_dir: Path, recursive: bool, resize: bool, quality: int) -> None:
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
 
     for src_path in src_paths:
-        try:
-            with Image.open(src_path) as image:
-                if resize:
-                    image_size = image.size
-                    new_size = (image_size[0] // 2, image_size[1] // 2)
-                    image = image.resize(new_size, Image.Resampling.LANCZOS)
+        if src_path.is_file():
+            try:
+                with Image.open(src_path) as image:
+                    if resize:
+                        image_size = image.size
+                        new_size = (image_size[0] // 2, image_size[1] // 2)
+                        image = image.resize(new_size, Image.Resampling.LANCZOS)
 
-                image.save(src_path, optimize=True, quality=quality)
-                print(f"Resized \"{src_path}\".", flush=True)
-        except Exception as e:
-            print(e)
+                    image.save(src_path, optimize=True, quality=quality)
+                    print(f"Resized \"{src_path}\".", flush=True)
+            except Exception as e:
+                print(e)
 
 
 def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool, quality: int) -> None:
