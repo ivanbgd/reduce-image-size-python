@@ -27,7 +27,7 @@ def different_paths(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool,
                     # The argument `optimize` is used for both JPEGs and PNGs.
                     # The argument `quality` is used for JPEGs, and simply ignored in case of PNGs.
                     image.save(dst_path, optimize=True, quality=quality)
-                    print(f"Resized \"{src_path}\" to \"{dst_path}\".", flush=True)
+                    print(f"Reduced \"{src_path}\" to \"{dst_path}\".", flush=True)
             except Exception as e:
                 print(e)
 
@@ -45,7 +45,7 @@ def same_paths(src_dir: Path, recursive: bool, resize: bool, quality: int) -> No
                         image = image.resize(new_size, Image.Resampling.LANCZOS)
 
                     image.save(src_path, optimize=True, quality=quality)
-                    print(f"Resized \"{src_path}\".", flush=True)
+                    print(f"Reduced \"{src_path}\".", flush=True)
             except Exception as e:
                 print(e)
 

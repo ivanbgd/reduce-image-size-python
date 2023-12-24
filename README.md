@@ -18,8 +18,8 @@ Options:
 - Reduce both image dimensions by half: `--resize`
 - JPEG quality, on a scale from 0 (worst) to 95 (best); the default is 75; ignored in case of PNGs: `--quality [QUALITY]`
 
-Written in Python 3.12.0.  
-Tested on Windows 11 with JPEGs and PNGs.  
+Developed in Python 3.12.0.  
+Tested on an x86-64 CPU with Windows 11 with JPEGs and PNGs.  
 Might work with other image formats, too, but this hasn't been tested.  
 Other OSes haven't been tested, but should work.
 
