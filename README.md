@@ -5,13 +5,19 @@ Reduces size of images in a folder (and optionally sub-folders, recursively).
 This is useful for archiving of photos, for example, as they look the same on a display even with a reduced file size.  
 This application reduces the file sizes of the images in bulk.
 
-Keeps the original images and creates copies with reduced file size.
+By default, keeps the original images and creates copies with reduced file size.
 
-Copies the entire folder tree, with all sub-folders that exist in the source tree.  
+By default, copies the entire folder tree, with all sub-folders that exist in the source tree.  
 The target folder tree will be created automatically, and the new reduced-size images will be copied properly to their respective paths.  
 It is only required to provide the root target folder, and it will also be created if it doesn't exist.
 
 The destination folder can be the same as the source folder, in which case the original images will be **overwritten**, and not retained.
+
+If there is enough disk space, it is advised to specify a different destination folder than the source folder,
+so that the original images can be retained and the newly-created reduced-size images can be inspected for quality.  
+A user can experiment with the `resize` and the `quality` arguments.  
+Also, the user can go only one level deep and not recursively, or simply experiment on a copy of an image folder.  
+If satisfied with the result, original images can be deleted afterwards easily to save disk and/or cloud space.
 
 Options:
 - Look into subdirectories recursively (process the entire tree); recommended: `-r`, `--recursive`
