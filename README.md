@@ -1,5 +1,6 @@
 # Reduce Image Size
 
+## Description
 Reduces size of images in a folder (and optionally sub-folders, recursively).
 
 This is useful for archiving of photos, for example, as they look the same on a display even with a reduced file size.  
@@ -19,17 +20,20 @@ A user can experiment with the `resize` and the `quality` arguments.
 Also, the user can go only one level deep and not recursively, or simply experiment on a copy of an image folder.  
 If satisfied with the result, original images can be deleted afterwards easily to save disk and/or cloud space.
 
-Options:
+## Options
 - Look into subdirectories recursively (process the entire tree); recommended: `-r`, `--recursive`
 - Reduce both image dimensions by half: `--resize`
 - JPEG quality, on a scale from 0 (worst) to 95 (best); the default is 75; ignored in case of PNGs: `--quality [QUALITY]`
 
+## Notes
 Developed in Python 3.12.0.  
 Tested on an x86-64 CPU with Windows 11 with JPEGs and PNGs.  
 Might work with other image formats, too, but this hasn't been tested.  
 Other OSes haven't been tested, but should work.
 
 ## Running the Application
+The described steps work on Windows, but should be similar for other OSes.
+
 ### Windows
 Go to the repository directory.
 
