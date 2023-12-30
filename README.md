@@ -26,15 +26,12 @@ If satisfied with the result, original images can be deleted afterwards easily t
 - JPEG quality, on a scale from 0 (worst) to 95 (best); the default is 75; ignored in case of PNGs: `--quality [QUALITY]`
 
 ## Notes
-Developed in Python 3.12.0.  
-Tested on an x86-64 CPU with Windows 11 with JPEGs and PNGs.  
-Might work with other image formats, too, but this hasn't been tested.  
-Other OSes haven't been tested, but should work.
+- Developed in Python 3.12.0.
+- Tested on an x86-64 CPU with Windows 11 with JPEGs and PNGs.
+- Might work with other image formats, too, but this hasn't been tested.
+- Other OSes haven't been tested, but should work.
 
 ## Running the Application
-The described steps work on Windows, but should be similar for other OSes.
-
-### Windows
 Go to the repository directory.
 
 Create & activate virtual environment and install requirements:  
@@ -45,11 +42,13 @@ pip install -r requirements.txt
 ```
 That only needs to be done once.
 
-If in the repository directory, activate the virtual environment:  
-`venv\Scripts\activate`
+If inside the repository directory, activate the virtual environment:  
+- Windows: `venv\Scripts\activate`  
+- Linux & macOS: `source venv/bin/activate`
 
 and run the program as:  
-`python src\reduce.py <source_folder> <destination_folder> [options]`
+- Windows: `python src\reduce.py <source_folder> <destination_folder> [options]`  
+- Linux & macOS: `python src/reduce.py <source_folder> <destination_folder> [options]`
 
 Or, provide full path to the program.
 
