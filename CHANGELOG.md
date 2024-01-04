@@ -7,8 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 
+
+### Added
+
 - Optional argument for minimum file size for which a user would like to perform file size reduction.
-  - It can come in three sizes: S, M, L, for 100 kB, 500 kB and 1 MB, respectively.
+  - It comes in three sizes: S, M, L, for 100 kB, 500 kB and 1 MB, respectively.
+
+### Changed
+
+- When source and destination folders are different, non-supported files will simply be copied to the destination.
+  - Previously, they would be left out.
 
 ## [0.1.0] - 2023-12-29
 This is the very first (initial) fully-functioning version of the program.
