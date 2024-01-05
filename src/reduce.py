@@ -2,6 +2,7 @@ import argparse
 import datetime
 import shutil
 import timeit
+from dataclasses import dataclass
 from pathlib import Path
 
 from PIL import Image
@@ -9,7 +10,24 @@ from PIL import Image
 from constants import QUALITY, Size
 
 
-def different_paths(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool, quality: int, size: Size) -> None:
+@dataclass
+class CLIArgs:
+    src_dir: Path
+    dst_dir: Path
+    recursive: bool
+    resize: bool
+    quality: int
+    size: Size
+
+
+def different_paths(cli_args: CLIArgs) -> None:
+    src_dir = cli_args.src_dir
+    dst_dir = cli_args.dst_dir
+    recursive = cli_args.recursive
+    resize = cli_args.resize
+    quality = cli_args.quality
+    size = cli_args.size
+
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
 
     for src_path in src_paths:
@@ -46,7 +64,13 @@ def different_paths(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool,
                 print(f"Copied \"{src_path}\" to \"{dst_path}\".", flush=True)
 
 
-def same_paths(src_dir: Path, recursive: bool, resize: bool, quality: int, size: Size) -> None:
+def same_paths(cli_args: CLIArgs) -> None:
+    src_dir = cli_args.src_dir
+    recursive = cli_args.recursive
+    resize = cli_args.resize
+    quality = cli_args.quality
+    size = cli_args.size
+
     src_paths = src_dir.glob("*") if not recursive else src_dir.glob("**/*")
 
     for src_path in src_paths:
@@ -68,11 +92,11 @@ def same_paths(src_dir: Path, recursive: bool, resize: bool, quality: int, size:
                 print(f"Skipped \"{src_path}\".", flush=True)
 
 
-def process_images(src_dir: Path, dst_dir: Path, recursive: bool, resize: bool, quality: int, size: Size) -> None:
-    if src_dir != dst_dir:
-        different_paths(src_dir, dst_dir, recursive, resize, quality, size)
+def process_images(cli_args: CLIArgs) -> None:
+    if cli_args.src_dir != cli_args.dst_dir:
+        different_paths(cli_args)
     else:
-        same_paths(src_dir, recursive, resize, quality, size)
+        same_paths(cli_args)
 
 
 def main() -> None:
@@ -135,6 +159,8 @@ def main() -> None:
         case ["l"] | ["L"]: size = Size.L
         case _: size = Size.DEFAULT
 
+    cli_args = CLIArgs(src_dir, dst_dir, recursive, resize, quality, size)
+
     try:
         dst_dir.mkdir(parents=True, exist_ok=True)
     except FileExistsError:
@@ -146,7 +172,7 @@ def main() -> None:
     print(f"Minimum image file size for processing is {size} bytes.")
     print(f"JPEG quality = {quality}\n", flush=True)
 
-    process_images(src_dir, dst_dir, recursive, resize, quality, size)
+    process_images(cli_args)
 
     end = timeit.default_timer()
     diff = end - start
