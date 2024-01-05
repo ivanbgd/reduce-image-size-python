@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Optional argument for minimum file size for which a user would like to perform file size reduction.
   - It comes in three sizes: S, M, L, for 100 kB, 500 kB and 1 MB, respectively.
+- Add some info messages: at startup, for copying and for skipping files.
 
 ### Changed
 

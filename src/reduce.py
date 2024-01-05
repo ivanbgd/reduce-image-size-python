@@ -128,22 +128,18 @@ def main() -> None:
     recursive: bool = args.recursive
     resize: bool = args.resize
     quality: int = args.quality
-    # size_arg: str = args.size[0].lower() if args.size is not None else ""
 
-    # print(args.size, size_arg)###
+    match args.size:
+        case ["s"] | ["S"]: size = Size.S
+        case ["m"] | ["M"]: size = Size.M
+        case ["l"] | ["L"]: size = Size.L
+        case _: size = Size.DEFAULT
 
     try:
         dst_dir.mkdir(parents=True, exist_ok=True)
     except FileExistsError:
         print(f"\"{dst_dir}\" exists and is a file! Provide a proper target directory.")
         return
-
-    # match size_arg:
-    match args.size:
-        case ["s"] | ["S"]: size = Size.S
-        case ["m"] | ["M"]: size = Size.M
-        case ["l"] | ["L"]: size = Size.L
-        case _: size = Size.DEFAULT
 
     print(f"Process recursively: {recursive}")
     print(f"Reduce image dimensions: {resize}")
