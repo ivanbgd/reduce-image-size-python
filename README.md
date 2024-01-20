@@ -30,6 +30,17 @@ If satisfied with the result, original images can be deleted afterwards easily t
   - S = 100 kB, M = 500 kB, L = 1 MB
   - Files that are smaller than the designated size will simply be copied to the destination folder.
 
+### Examples
+See below for how to prepare the application for running.  
+The file paths in the examples are for Windows.
+- `python src\reduce.py D:\img_src D:\img_dst`
+- `python src\reduce.py D:\img_src D:\img_dst -r`
+- `python src\reduce.py D:\img_src D:\img_dst -r -s m`
+- `python src\reduce.py D:\img_src D:\img_dst --recursive --size L`
+- `python src\reduce.py D:\img_src D:\img_dst -r --resize -q 60 -s l`
+- `python src\reduce.py D:\img_src D:\img_dst --recursive --resize --quality 60 --size L`
+
+
 ## Notes
 - Developed in Python 3.12.0.
 - Tested on an x86-64 CPU on Windows 11.
